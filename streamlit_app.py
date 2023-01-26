@@ -29,16 +29,18 @@ fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 # write your own comment - what does this do?
 streamlit.dataframe(fruityvice_normalized)
 
+ 
+add_my_fruit_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
+# put data in table
+added_fruit = pandas.json_normalize(add_my_fruit_response.json())
 
-add_my_fruit = streamlit.text_input('Pick another fruit for the list?','Kiwi')
-df_add=streamlit.dataframe(add_my_fruit)
 
 import snowflake.connector
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 my_cur.execute("SELECT * from fruit_load_list")
 my_data_rows = my_cur.fetchall()
-streamlit.dataframe(my_data_rows).add_rows(df_add)
+streamlit.dataframe(my_data_rows).add_rows(added_fruit)
 streamlit.header("The fruit load list contains:")
 streamlit.dataframe(my_data_rows)
 
