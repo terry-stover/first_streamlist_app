@@ -29,8 +29,11 @@ fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 # write your own comment - what does this do?
 streamlit.dataframe(fruityvice_normalized)
 
- 
-add_my_fruit_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
+streamlit.header('Add a Fruit to the list')
+added_fruit_text = streamlit.text_input('What fruit would you to add?','Grape')
+streamlit.write('The user entered ', added_fruit_text)
+
+add_my_fruit_response = requests.get("https://fruityvice.com/api/fruit/" + added_fruit_text)
 # put data in table
 added_fruit = pandas.json_normalize(add_my_fruit_response.json())
 
