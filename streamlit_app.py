@@ -38,12 +38,3 @@ add_my_fruit_response = requests.get("https://fruityvice.com/api/fruit/" + added
 added_fruit = pandas.json_normalize(add_my_fruit_response.json())
 
 
-import snowflake.connector
-my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-my_cur = my_cnx.cursor()
-my_cur.execute("SELECT * from fruit_load_list")
-my_data_rows = my_cur.fetchall()
-streamlit.dataframe(my_data_rows).add_rows(added_fruit)
-streamlit.header("The fruit load list contains:")
-streamlit.dataframe(my_data_rows)
-
