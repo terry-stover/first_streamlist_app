@@ -31,7 +31,7 @@ streamlit.dataframe(fruityvice_normalized)
 
 streamlit.header('Add a Fruit to the list')
 added_fruit_text = streamlit.text_input('What fruit would you to add?','Grape')
-streamlit.write('The user entered ', added_fruit_text)
+streamlit.write('The user added ', added_fruit_text)
 
 add_my_fruit_response = requests.get("https://fruityvice.com/api/fruit/" + added_fruit_text)
 # put data in table
